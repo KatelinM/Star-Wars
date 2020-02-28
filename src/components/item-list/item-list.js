@@ -14,7 +14,6 @@ export default class ItemList extends React.Component {
     updatePeople = p => {
         swapi.getAllPeople()
             .then((p) => {
-                console.log('p', p);
                     this.setState(
                         {people: p}
                     )

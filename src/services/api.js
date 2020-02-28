@@ -19,14 +19,24 @@ class SwapiService {
          return result.results;
     }
 
-    getPlanet(id) {
-        return this.getResource(`planets/${id}/`);
+    async getPlanet(id) {
+        const planet = await this.getResource(`planets/${id}/`);
+        return this._planetFormatted(planet, id);
     }
     async getAllPlanets() {
         const result = await this.getResource(`planets/`);
         return result.results;
     }
 
+    _planetFormatted (planet, id) {
+        return {
+            id,
+            name: planet.name,
+            population: planet.population,
+            rotationPeriod: planet.rotation_period,
+            diameter: planet.diameter,
+          }
+    }
 }
 
 export default SwapiService;
