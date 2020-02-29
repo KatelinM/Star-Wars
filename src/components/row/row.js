@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import './item-details.css';
+import './row.css';
 import SwapiService from "../../services/api";
 import Loader from "../loader";
 
-export default class ItemDetails extends Component {
+export default class Row extends Component {
   swapi = new SwapiService()
 
   state = {
@@ -13,8 +13,8 @@ export default class ItemDetails extends Component {
   };
 
   updatePerson() {
-    const { selectedItemId } = this.props;
-    if (!selectedItemId) {
+    const { personId } = this.props;
+    if (!personId) {
       return;
     }
 
@@ -22,7 +22,7 @@ export default class ItemDetails extends Component {
       loading: true,
     })
 
-    this.swapi.getPerson(selectedItemId)
+    this.swapi.getPerson(personId)
         .then(person => {
           this.setState({
             item: person,
@@ -32,7 +32,7 @@ export default class ItemDetails extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.selectedItemId !== this.props.selectedItemId) {
+    if (prevProps.personId !== this.props.personId) {
       this.updatePerson()
     }
   }

@@ -1,21 +1,19 @@
 import React from 'react';
-
 import './item-list.css';
-import SwapiService from "../../services/api";
-
-let swapi = new SwapiService();
+import Error from "../../components/error-indicator/error";
 
 export default class ItemList extends React.Component {
-
     state = {
-        people: []
+        itemList: [],
+        error: false,
     };
 
-    updatePeople = p => {
-        swapi.getAllPeople()
-            .then((p) => {
+    updatePeople = itemList => {
+        const { getData } = this.props;
+        getData()
+            .then((itemList) => {
                     this.setState(
-                        {people: p}
+                        {itemList}
                     )
                 }
             )
@@ -25,16 +23,29 @@ export default class ItemList extends React.Component {
         this.updatePeople();
     }
 
+    componentDidCatch() {
+        this.setState({
+            error: true
+        });
+    }
+
     render() {
-        let { people } = this.state;
+        let { itemList, error } = this.state;
+
+        if(error){
+            return <Error/>
+        }
         return (
-            <ul className="item-list list-group">
+            <ul className="item-list list-group mb-20">
 
                 {
-                    people.map( p => {
+                    itemList.map( i => {
+                        let label = this.props.renderItem(i);
                         return (
-                            <li className="list-group-item" key={p.name}>
-                                {p.name}
+                            <li className={`${this.props.selectedItemId === i.id ? 'active' : null} list-group-item`}
+                                key={i.name}
+                                onClick={() => this.props.onItemSelected(i.id)}>
+                                {label}
                             </li>
                         )
                     })

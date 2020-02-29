@@ -21,6 +21,7 @@ export default class RandomPlanet extends Component {
       loading: false,
     })
   }
+
   onError=()=> {
     this.setState({
       error: true,
@@ -28,9 +29,10 @@ export default class RandomPlanet extends Component {
     })
   }
 
-  updatePlanet() {
+  updatePlanet = () => { //без стрелочной функции будет ошибка в this.interval = setInterval(this.updatePlanet, 2000)
     const id = Math.floor(Math.random()*25) + 2;
-    swapi.getPlanet(996)
+
+    swapi.getPlanet(id)
         .then( (planet) =>
             this.onPlanetLoaded(planet)
         )
@@ -40,7 +42,12 @@ export default class RandomPlanet extends Component {
   }
 
   componentDidMount() {
-    this.updatePlanet()
+    this.updatePlanet();
+    this.interval = setInterval(this.updatePlanet, 5000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   render() {
