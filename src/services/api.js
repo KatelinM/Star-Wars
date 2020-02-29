@@ -13,17 +13,34 @@ class SwapiService {
     getPerson = async (id) => {
         const person = await this.getResource(`people/${id}/`);
         return {
-            id: this._extractId(person),
+            id,
             name: person.name,
             gender: person.gender,
             birthYear: person.birth_year,
             eyeColor: person.eye_color,
         }
     }
+    getStarship = async (id) => {
+        const starship = await this.getResource(`starships/${id}/`);
+        return {
+            id,
+            name: starship.name,
+            speed: starship.max_atmosphering_speed,
+            passengers: starship.passengers,
+        }
+    }
 
     getPlanet = async (id) => {
         const planet = await this.getResource(`planets/${id}/`);
         return this._planetFormatted(planet, id);
+    }
+
+    getPersonImage = (id) => {
+        return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
+    }
+
+    getStarshipImage = (id) => {
+        return `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`
     }
 
     getAllPeople = async () => {

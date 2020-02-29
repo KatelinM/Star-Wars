@@ -1,6 +1,6 @@
 import React from 'react';
 import './item-list.css';
-import Error from "../../components/error-indicator/error";
+import Error from "../../components/error-indicator/index";
 
 export default class ItemList extends React.Component {
     state = {
@@ -40,9 +40,9 @@ export default class ItemList extends React.Component {
 
                 {
                     itemList.map( i => {
-                        let label = this.props.renderItem(i);
+                        let label = this.props.children(i);
                         return (
-                            <li className={`${this.props.selectedItemId === i.id ? 'active' : null} list-group-item`}
+                            <li className={`${this.props.itemId === i.id ? 'active' : null} list-group-item`}
                                 key={i.name}
                                 onClick={() => this.props.onItemSelected(i.id)}>
                                 {label}

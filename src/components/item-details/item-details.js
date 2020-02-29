@@ -9,20 +9,22 @@ export default class ItemDetails extends Component {
 
   state = {
     item: {},
-    loading: false
+    loading: false,
+    image: null
   };
 
   updatePerson() {
-    const { selectedItemId } = this.props;
-    if (!selectedItemId) {
+    const { itemId, getData, getImage } = this.props;
+    if (!itemId) {
       return;
     }
 
     this.setState({
       loading: true,
+      image: getImage(itemId)
     })
 
-    this.swapi.getPerson(selectedItemId)
+    getData(itemId)
         .then(person => {
           this.setState({
             item: person,
@@ -32,7 +34,7 @@ export default class ItemDetails extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.selectedItemId !== this.props.selectedItemId) {
+    if (prevProps.itemId !== this.props.itemId) {
       this.updatePerson()
     }
   }
@@ -44,7 +46,7 @@ export default class ItemDetails extends Component {
   render() {
     let { id, name, gender, birthYear, eyeColor } = this.state.item;
     if (!id) {
-      return <div>Select person from the list</div>
+      return <div>Select <b>{this.props.itemName}</b> from the list</div>
     }
 
     if (this.state.loading) {
@@ -54,7 +56,7 @@ export default class ItemDetails extends Component {
     return (
       <div className="person-details card">
         <img className="person-image"
-          src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} />
+          src={this.state.image} />
 
         <div className="card-body">
           <h4>{name}</h4>

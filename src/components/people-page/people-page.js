@@ -5,29 +5,39 @@ import ItemDetails from '../item-details';
 
 import './people-page.css';
 import SwapiService from "../../services/api";
+import Row from "../row";
+import ErrorBoundary from "../error-boundary/index";
 
 const PeoplePage = () => {
-    const [selectedItemId, setSelectedItemId] = useState(null);
+    const [itemId, setSelectedItemId] = useState(null);
     const onItemClicked = function (id) {
         setSelectedItemId(id);
     };
     const swapi = new SwapiService()
 
+    const list = (
+        <ErrorBoundary>
+        <ItemList
+            onItemSelected = {(id)=>{ onItemClicked(id) }}
+            getData = {swapi.getAllPeople}
+            itemId={itemId}
+        >
+            {({name, birthYear})=>`${name} (${birthYear})`}
+        </ItemList>
+        </ErrorBoundary>
+
+    );
+    const details = (
+        <ErrorBoundary>
+            <ItemDetails itemId={itemId}
+                         getData = {swapi.getPerson}
+                         getImage = {swapi.getPersonImage}
+                         itemName = 'person'/>
+        </ErrorBoundary>
+    );
+
     return (
-        <>
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList
-                        onItemSelected = {(id)=>{ onItemClicked(id) }}
-                        getData = {swapi.getAllPeople}
-                        renderItem = {({name, birthYear})=>`${name} (${birthYear})`}
-                        selectedItemId={selectedItemId}/>
-                </div>
-                <div className="col-md-6">
-                    <ItemDetails selectedItemId={selectedItemId} />
-                </div>
-            </div>
-        </>
+        <Row left={ list } right={ details } />
     );
 };
 

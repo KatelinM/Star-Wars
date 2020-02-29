@@ -5,22 +5,22 @@ import ItemDetails from '../item-details';
 
 import './starship-page.css';
 import SwapiService from "../../services/api";
+import Row from "../row";
 
 const StarshipPage = () => {
-    const [selectedItemId, setSelectedItemId] = useState(null);
+    const [itemId, setSelectedItemId] = useState(null);
     const onItemClicked = function (id) {
         setSelectedItemId(id);
     };
     const swapi = new SwapiService()
 
-    return (
-        <>
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList
+    const list = (
+                     <ItemList
                         onItemSelected = {(id)=>{ onItemClicked(id) }}
                         getData = {swapi.getAllStarships}
-                        renderItem = {({name, speed, passengers})=>(
+                        itemId={itemId}
+                     >
+                         {({name, speed, passengers})=>(
                             <span>
                                 {name } (
                                     {speed !== 'n/a' ? `${speed} м/с, `:null}
@@ -28,13 +28,19 @@ const StarshipPage = () => {
                                 )
                             </span>
                         )}
-                        selectedItemId={selectedItemId}/>
-                </div>
-                <div className="col-md-6">
-                    <ItemDetails personId={selectedItemId} />
-                </div>
-            </div>
-        </>
+                     </ItemList>
+    )
+
+    const details = (
+        <ItemDetails itemId={itemId}
+                     getData = {swapi.getStarship}
+                     getImage = {swapi.getStarshipImage}
+                     itemName = 'starship'/>
+    )
+
+
+    return (
+        <Row left={list}  right={details} />
     );
 };
 

@@ -4,6 +4,7 @@ import './random-planet.css';
 import SwapiService from "../../services/api";
 import Loader from "../loader";
 import Error from "../error-indicator/index";
+import ErrorBoundary from "../error-boundary";
 
 let swapi = new SwapiService();
 
@@ -54,11 +55,14 @@ export default class RandomPlanet extends Component {
     let {loading, error, planet} = this.state;
 
     return  (
-        <div className="random-planet jumbotron rounded">
+        <ErrorBoundary>
+          <div className="random-planet jumbotron rounded">
           { loading ? <Loader/> : null }
           { error ? <Error/> : null }
           { !loading && !error ? <PlanetView planet = {planet} /> : null }
         </div>
+        </ErrorBoundary>
+
 
     );
   }

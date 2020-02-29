@@ -1,79 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './row.css';
-import SwapiService from "../../services/api";
-import Loader from "../loader";
 
-export default class Row extends Component {
-  swapi = new SwapiService()
+export default function Row(props) {
 
-  state = {
-    item: {},
-    loading: false
-  };
-
-  updatePerson() {
-    const { personId } = this.props;
-    if (!personId) {
-      return;
-    }
-
-    this.setState({
-      loading: true,
-    })
-
-    this.swapi.getPerson(personId)
-        .then(person => {
-          this.setState({
-            item: person,
-            loading: false
-          })
-        })
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.personId !== this.props.personId) {
-      this.updatePerson()
-    }
-  }
-
-  componentDidMount() {
-    this.updatePerson()
-  }
-
-  render() {
-    let { id, name, gender, birthYear, eyeColor } = this.state.item;
-    if (!id) {
-      return <div>Select person from the list</div>
-    }
-
-    if (this.state.loading) {
-      return <Loader/>
-    }
-
-    return (
-      <div className="person-details card">
-        <img className="person-image"
-          src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} />
-
-        <div className="card-body">
-          <h4>{name}</h4>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              <span className="term">Gender</span>
-              <span>{gender}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Birth Year</span>
-              <span>{birthYear}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Eye Color</span>
-              <span>{eyeColor}</span>
-            </li>
-          </ul>
-        </div>
+  return (
+      <div className="row mb2">
+          <div className="col-md-6">
+              { props.left }
+          </div>
+          <div className="col-md-6">
+              { props.right }
+          </div>
       </div>
-    )
-  }
+  )
 }

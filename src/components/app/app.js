@@ -10,7 +10,7 @@ import PeoplePage from "../people-page";
 import StarshipPage from "../starship-page";
 
 const App = () => {
-    const [selectedItemId, setSelectedItemId] = useState(null);
+    const [itemId, setSelectedItemId] = useState(null);
     const onItemClicked = function (id) {
         setSelectedItemId(id);
     };
