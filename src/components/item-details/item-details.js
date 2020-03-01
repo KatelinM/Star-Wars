@@ -3,6 +3,19 @@ import React, { Component } from 'react';
 import './item-details.css';
 import Loader from "../loader";
 
+const Record = ({item, field, label}) => {
+  return (
+       <li className="list-group-item">
+         <span className="term">{ label }:</span>
+         <span>{ item[field] }</span>
+       </li>
+  )
+};
+
+export {
+  Record
+};
+
 export default class ItemDetails extends Component {
 
   state = {
@@ -42,37 +55,31 @@ export default class ItemDetails extends Component {
   }
 
   render() {
-    let { id, name, gender, birthYear, eyeColor } = this.state.item;
-    console.log(this.state.item)
-    if (!id) {
+    let { name } = this.state.item;
+    let { item, loading } = this.state;
+
+    if (Object.entries(item).length === 0 && item.constructor === Object) {
       return <div>Select <b>{ this.props.itemName }</b> from the list</div>
     }
 
-    if (this.state.loading) {
+    if (loading) {
       return <Loader/>
     }
 
     return (
       <div className="person-details card">
         <img className="person-image"
-          src={this.state.image}
+          src={ this.state.image }
           alt={ name }/>
 
         <div className="card-body">
           <h4>{ name }</h4>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              <span className="term">Gender</span>
-              <span>{ gender }</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Birth Year</span>
-              <span>{ birthYear }</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Eye Color</span>
-              <span>{ eyeColor }</span>
-            </li>
+            {
+              React.Children.map(this.props.children, (c, idx) => {
+                return React.cloneElement(c, {item});
+              })
+            }
           </ul>
         </div>
       </div>

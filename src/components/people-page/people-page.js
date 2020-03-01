@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-import ItemList from '../item-list';
-import ItemDetails from '../item-details';
-
 import './people-page.css';
 import SwapiService from "../../services/api";
 import Row from "../row";

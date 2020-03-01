@@ -12,29 +12,20 @@ class SwapiService {
 
     getPerson = async (id) => {
         const person = await this.getResource(`people/${id}/`);
-        return {
-            id,
-            name: person.name,
-            gender: person.gender,
-            birthYear: person.birth_year,
-            eyeColor: person.eye_color,
-        }
+        return person;
     };
 
-    getStarship = async (id) => {
-        const starship = await this.getResource(`starships/${id}/`);
-        return {
-            id,
-            name: starship.name,
-            speed: starship.max_atmosphering_speed,
-            passengers: starship.passengers,
-        }
-    };
 
     getPlanet = async (id) => {
         const planet = await this.getResource(`planets/${id}/`);
         return this._planetFormatted(planet, id);
     };
+
+    getStarship = async (id) => {
+        const starship = await this.getResource(`starships/${id}/`);
+        return starship;
+    };
+
 
     getPersonImage = (id) => {
         return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
@@ -81,11 +72,8 @@ class SwapiService {
 
     _planetFormatted = (planet, id) => {
         return {
+            ...planet,
             id: this._extractId(planet),
-            name: planet.name,
-            population: planet.population,
-            rotationPeriod: planet.rotation_period,
-            diameter: planet.diameter,
         }
     };
 
