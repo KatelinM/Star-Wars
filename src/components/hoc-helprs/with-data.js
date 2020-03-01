@@ -1,5 +1,6 @@
 import React from "react";
 import Loader from "../loader";
+import ErrorBoundary from "../error-boundary";
 
 const withData = (View, getData) => {
     return class extends React.Component {
@@ -29,7 +30,11 @@ const withData = (View, getData) => {
             if (!data.length){
                 return <Loader />
             }
-            return <View {...this.props} data = {data} />;
+            return (
+                <ErrorBoundary>
+                    <View {...this.props} data = {data} />
+                </ErrorBoundary>
+                )
         }
     }
 };

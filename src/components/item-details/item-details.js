@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './item-details.css';
 import Loader from "../loader";
 
 const Record = ({item, field, label}) => {
   return (
-       <li className="list-group-item">
-         <span className="term">{ label }:</span>
-         <span>{ item[field] }</span>
-       </li>
+      <li className="list-group-item">
+        <span className="term">{ label }:</span>
+        <span>{ item[field] }</span>
+      </li>
   )
 };
 
@@ -16,73 +16,59 @@ export {
   Record
 };
 
-export default class ItemDetails extends Component {
+const ItemDetails = (props) => {
 
-  state = {
-    item: {},
-    loading: false,
-    image: null
-  };
+  const [item, setItem] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
 
-  updatePerson() {
-    const { itemId, getData, getImage } = this.props;
+  const updatePerson = () =>{
+    const { itemId, getData, getImage } = props;
     if (!itemId) {
       return;
     }
 
-    this.setState({
-      loading: true,
-      image: getImage(itemId)
-    });
+    setLoading(true);
+    setImage(getImage(itemId));
 
     getData(itemId)
         .then(person => {
-          this.setState({
-            item: person,
-            loading: false
-          })
+          setLoading(false);
+          setItem(person);
         })
+  };
+
+  useEffect(() => {
+    updatePerson();
+  }, [props.itemId]);
+
+
+  if (Object.entries(item).length === 0 && item.constructor === Object) {
+    return <div>Select <b>{ props.itemName }</b> from the list</div>
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.itemId !== this.props.itemId) {
-      this.updatePerson()
-    }
+  if (loading) {
+    return <Loader/>
   }
 
-  componentDidMount() {
-    this.updatePerson()
-  }
-
-  render() {
-    let { name } = this.state.item;
-    let { item, loading } = this.state;
-
-    if (Object.entries(item).length === 0 && item.constructor === Object) {
-      return <div>Select <b>{ this.props.itemName }</b> from the list</div>
-    }
-
-    if (loading) {
-      return <Loader/>
-    }
-
-    return (
+  return (
       <div className="person-details card">
         <img className="person-image"
-          src={ this.state.image }
-          alt={ name }/>
+             src={ image }
+             alt={ item.name }/>
 
         <div className="card-body">
-          <h4>{ name }</h4>
+          <h4>{ item.name }</h4>
           <ul className="list-group list-group-flush">
             {
-              React.Children.map(this.props.children, (c, idx) => {
+              React.Children.map(props.children, (c, idx) => {
                 return React.cloneElement(c, {item});
               })
             }
           </ul>
         </div>
       </div>
-    )
-  }
-}
+  )
+};
+
+export default ItemDetails;
