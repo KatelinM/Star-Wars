@@ -3,19 +3,6 @@ import React, { useState, useEffect } from 'react';
 import './item-details.css';
 import Loader from "../loader";
 
-const Record = ({item, field, label}) => {
-  return (
-      <li className="list-group-item">
-        <span className="term">{ label }:</span>
-        <span>{ item[field] }</span>
-      </li>
-  )
-};
-
-export {
-  Record
-};
-
 const ItemDetails = (props) => {
 
   const [item, setItem] = useState({});

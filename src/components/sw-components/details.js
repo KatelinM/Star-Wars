@@ -2,7 +2,7 @@ import React from "react";
 
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/api";
-import {Record} from "../item-details/item-details";
+import Record from "../item-details/record";
 
 const swapi = new SwapiService();
 let{

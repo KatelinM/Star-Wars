@@ -7,12 +7,16 @@ import RandomPlanet from '../random-planet';
 import './app.css';
 import PeoplePage from "../people-page";
 import StarshipPage from "../starship-page";
+import UseCon from "../../use-context";
 
 const App = () => {
     return (
-        <>
+        <BrowserRouter>
+            <UseCon/>
             <Header />
             <RandomPlanet />
+
+
             <PeoplePage />
             <StarshipPage />
         </>
