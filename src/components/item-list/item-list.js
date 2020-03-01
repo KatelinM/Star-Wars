@@ -1,57 +1,41 @@
 import React from 'react';
+
 import './item-list.css';
-import Error from "../../components/error-indicator/index";
 
-export default class ItemList extends React.Component {
-    state = {
-        itemList: [],
-        error: false,
-    };
+function ItemList(props) {
+    let {data} = props;
+    return (
+        <ul className="item-list list-group mb-20">
 
-    updatePeople = itemList => {
-        const { getData } = this.props;
-        getData()
-            .then((itemList) => {
-                    this.setState(
-                        {itemList}
+            {
+                data.map(i => {
+                    let label = props.children(i);
+                    return (
+                        <li className={`${props.itemId === i.id ? 'active' : null} list-group-item`}
+                            key={i.name}
+                            onClick={() => props.onItemSelected(i.id)}>
+                            {label}
+                        </li>
                     )
-                }
-            )
-    };
+                })
+            }
 
-    componentDidMount() {
-        this.updatePeople();
-    }
+        </ul>
+    );
+}
 
-    componentDidCatch() {
-        this.setState({
-            error: true
-        });
-    }
+export default ItemList;
 
-    render() {
-        let { itemList, error } = this.state;
 
-        if(error){
-            return <Error/>
+const f = () => {
+    return class extends React.Component {
+        componentDidMount() {
+            console.log(this.props)
+            //    {itemId: null, onItemSelected: ƒ, getData: ƒ, children: ƒ}
         }
-        return (
-            <ul className="item-list list-group mb-20">
 
-                {
-                    itemList.map( i => {
-                        let label = this.props.children(i);
-                        return (
-                            <li className={`${this.props.itemId === i.id ? 'active' : null} list-group-item`}
-                                key={i.name}
-                                onClick={() => this.props.onItemSelected(i.id)}>
-                                {label}
-                            </li>
-                        )
-                    })
-                }
-
-            </ul>
-        );
+        render() {
+            return <ItemList {...this.props} />;
+        }
     }
 }

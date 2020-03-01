@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
 import './item-details.css';
-import SwapiService from "../../services/api";
 import Loader from "../loader";
 
 export default class ItemDetails extends Component {
-  swapi = new SwapiService()
 
   state = {
     item: {},
@@ -22,7 +20,7 @@ export default class ItemDetails extends Component {
     this.setState({
       loading: true,
       image: getImage(itemId)
-    })
+    });
 
     getData(itemId)
         .then(person => {
@@ -45,8 +43,9 @@ export default class ItemDetails extends Component {
 
   render() {
     let { id, name, gender, birthYear, eyeColor } = this.state.item;
+    console.log(this.state.item)
     if (!id) {
-      return <div>Select <b>{this.props.itemName}</b> from the list</div>
+      return <div>Select <b>{ this.props.itemName }</b> from the list</div>
     }
 
     if (this.state.loading) {
@@ -56,22 +55,23 @@ export default class ItemDetails extends Component {
     return (
       <div className="person-details card">
         <img className="person-image"
-          src={this.state.image} />
+          src={this.state.image}
+          alt={ name }/>
 
         <div className="card-body">
-          <h4>{name}</h4>
+          <h4>{ name }</h4>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
               <span className="term">Gender</span>
-              <span>{gender}</span>
+              <span>{ gender }</span>
             </li>
             <li className="list-group-item">
               <span className="term">Birth Year</span>
-              <span>{birthYear}</span>
+              <span>{ birthYear }</span>
             </li>
             <li className="list-group-item">
               <span className="term">Eye Color</span>
-              <span>{eyeColor}</span>
+              <span>{ eyeColor }</span>
             </li>
           </ul>
         </div>

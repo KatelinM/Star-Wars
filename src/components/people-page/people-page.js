@@ -7,6 +7,7 @@ import './people-page.css';
 import SwapiService from "../../services/api";
 import Row from "../row";
 import ErrorBoundary from "../error-boundary/index";
+import {PersonDetails, PersonList} from "../sw-components";
 
 const PeoplePage = () => {
     const [itemId, setSelectedItemId] = useState(null);
@@ -17,19 +18,18 @@ const PeoplePage = () => {
 
     const list = (
         <ErrorBoundary>
-        <ItemList
+        <PersonList
             onItemSelected = {(id)=>{ onItemClicked(id) }}
-            getData = {swapi.getAllPeople}
             itemId={itemId}
         >
             {({name, birthYear})=>`${name} (${birthYear})`}
-        </ItemList>
+        </PersonList>
         </ErrorBoundary>
 
     );
     const details = (
         <ErrorBoundary>
-            <ItemDetails itemId={itemId}
+            <PersonDetails itemId={itemId}
                          getData = {swapi.getPerson}
                          getImage = {swapi.getPersonImage}
                          itemName = 'person'/>

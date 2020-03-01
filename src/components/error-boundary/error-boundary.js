@@ -1,9 +1,7 @@
 import React from 'react';
 
-import icon from './error.png';
 import './error-boundary.css';
 import Error from "../error-indicator";
-
 
 export default class ErrorBoundary extends React.Component {
     state = {

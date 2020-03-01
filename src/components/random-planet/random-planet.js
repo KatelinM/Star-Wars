@@ -5,6 +5,7 @@ import SwapiService from "../../services/api";
 import Loader from "../loader";
 import Error from "../error-indicator/index";
 import ErrorBoundary from "../error-boundary";
+import icon from '../../services/helpers/no.jpg';
 
 let swapi = new SwapiService();
 
@@ -44,7 +45,7 @@ export default class RandomPlanet extends Component {
 
   componentDidMount() {
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 5000)
+    this.interval = setInterval(this.updatePlanet, 3000)
   }
 
   componentWillUnmount() {
@@ -57,13 +58,11 @@ export default class RandomPlanet extends Component {
     return  (
         <ErrorBoundary>
           <div className="random-planet jumbotron rounded">
-          { loading ? <Loader/> : null }
-          { error ? <Error/> : null }
-          { !loading && !error ? <PlanetView planet = {planet} /> : null }
-        </div>
+            { loading ? <Loader/> : null }
+            { error ? <Error/> : null }
+            { !loading && !error ? <PlanetView planet = {planet} /> : null }
+          </div>
         </ErrorBoundary>
-
-
     );
   }
 }
@@ -74,21 +73,22 @@ const PlanetView = ({planet}) => {
   return (
       <>
         <img className="planet-image"
-             src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}/>
+             src={ swapi.getPlanetImage(id) }
+             alt={ name } />
         <div>
-          <h4>{name}</h4>
+          <h4>{ name }</h4>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
               <span className="term">Population</span>
-              <span>{population}</span>
+              <span>{ population }</span>
             </li>
             <li className="list-group-item">
               <span className="term">Rotation Period</span>
-              <span>{rotationPeriod}</span>
+              <span>{ rotationPeriod }</span>
             </li>
             <li className="list-group-item">
               <span className="term">Diameter</span>
-              <span>{diameter}</span>
+              <span>{ diameter }</span>
             </li>
           </ul>
         </div>

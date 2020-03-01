@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-import ItemList from '../item-list';
-import ItemDetails from '../item-details';
-
 import './starship-page.css';
 import SwapiService from "../../services/api";
 import Row from "../row";
+import {StarshipDetails, StarshipList} from "../sw-components";
 
 const StarshipPage = () => {
     const [itemId, setSelectedItemId] = useState(null);
@@ -15,9 +13,8 @@ const StarshipPage = () => {
     const swapi = new SwapiService()
 
     const list = (
-                     <ItemList
+                     <StarshipList
                         onItemSelected = {(id)=>{ onItemClicked(id) }}
-                        getData = {swapi.getAllStarships}
                         itemId={itemId}
                      >
                          {({name, speed, passengers})=>(
@@ -28,11 +25,11 @@ const StarshipPage = () => {
                                 )
                             </span>
                         )}
-                     </ItemList>
+                     </StarshipList>
     )
 
     const details = (
-        <ItemDetails itemId={itemId}
+        <StarshipDetails itemId={itemId}
                      getData = {swapi.getStarship}
                      getImage = {swapi.getStarshipImage}
                      itemName = 'starship'/>
