@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import './starship-page.css';
-import SwapiService from "../../services/api";
-import Row from "../row";
-import { StarshipDetails, StarshipList } from "../sw-components";
+import SwapiService from "../../../services/api";
+import Row from "../../row";
+import { StarshipDetails, StarshipList } from "../../sw-components";
 
 const StarshipPage = () => {
     const [itemId, setSelectedItemId] = useState(null);

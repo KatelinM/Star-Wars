@@ -12,7 +12,10 @@ class SwapiService {
 
     getPerson = async (id) => {
         const person = await this.getResource(`people/${id}/`);
-        return person;
+        return  {
+                    ...person,
+                    id: this._extractId(person),
+                };
     };
 
 
@@ -23,7 +26,10 @@ class SwapiService {
 
     getStarship = async (id) => {
         const starship = await this.getResource(`starships/${id}/`);
-        return starship;
+        return {
+            ...starship,
+            id: this._extractId(starship),
+        };
     };
 
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import './people-page.css';
-import SwapiService from "../../services/api";
-import Row from "../row";
-import ErrorBoundary from "../error-boundary/index";
-import {PersonDetails, PersonList} from "../sw-components";
+import SwapiService from "../../../services/api";
+import Row from "../../row";
+import ErrorBoundary from "../../error-boundary/index";
+import {PersonDetails, PersonList} from "../../sw-components";
 
 const PeoplePage = () => {
     const [itemId, setSelectedItemId] = useState(null);

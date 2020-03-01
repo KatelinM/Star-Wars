@@ -5,16 +5,16 @@ import './header.css';
 
 const Header = () => {
   return (
-      <Router>
+      <>
           <div className="header d-flex">
           <h3>
-            <Link to="#">
+            <Link to="/">
               Star DB
             </Link>
           </h3>
           <ul className="d-flex">
             <li>
-              <Link to="/test/use-context">People</Link>
+              <Link to="people">People</Link>
             </li>
             <li>
               <Link to="planets">Planets</Link>
@@ -27,7 +27,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
-      </Router>
+      </>
   );
 };
 

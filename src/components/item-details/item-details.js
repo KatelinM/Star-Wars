@@ -2,6 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 import './item-details.css';
 import Loader from "../loader";
+import {Link} from "react-router-dom";
+
+
+function withDataDetails() {
+    return class extends React.Component {
+
+         render() {
+             return ;
+         }
+    }
+}
 
 const ItemDetails = (props) => {
 
@@ -49,10 +60,13 @@ const ItemDetails = (props) => {
           <ul className="list-group list-group-flush">
             {
               React.Children.map(props.children, (c, idx) => {
-                return React.cloneElement(c, {item});
+                  return React.cloneElement(c, {item});
               })
             }
           </ul>
+            <button>
+                <Link to={`/people/${item.id}`}>Go to { item.name } </Link>
+            </button>
         </div>
       </div>
   )
