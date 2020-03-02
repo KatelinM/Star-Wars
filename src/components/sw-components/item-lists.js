@@ -22,17 +22,19 @@ const withChild = (View, child) => {
 };
 
 const PersonList = withData( withChild(
-        ItemList,
-        ({ name, birth_year }) => `${ name } (${ birth_year })`
-    ), getAllPeople);
+    ItemList,
+    ({ name, birth_year }) => `${ name } (${ birth_year })`
+), getAllPeople);
+
 const PlanetList = withData( withChild(
-        ItemList,
-        ({ name, diameter }) => `${ name } (${ diameter }km)`
-    ), getAllPlanets);
+    ItemList,
+    ({ name, diameter }) => `${ name } (${ diameter }km)`
+), getAllPlanets);
+
 const StarshipList = withData( withChild(
-        ItemList,
-        ({ name, passengers }) => `${ name } (${ passengers } passengers )`
-    ), getAllStarships);
+    ItemList,
+    ({ name, passengers }) => `${ name } (${ passengers } passengers )`
+), getAllStarships);
 
 export {
     PersonList,

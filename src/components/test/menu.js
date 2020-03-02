@@ -5,9 +5,12 @@ import { NavLink} from "react-router-dom";
 const TestMenu = () =>{
     return (
         <>
-            <ul className="d-flex">
+            <ul>
+                {/*<li>*/}
+                {/*    <NavLink to='/test/use-context/'> useContext Hook </NavLink>*/}
+                {/*</li>*/}
                 <li>
-                    <NavLink to='/test/use-context/'> useContext Hook </NavLink>
+                    <NavLink to='/test/'> Redux Test </NavLink>
                 </li>
             </ul>
         </>

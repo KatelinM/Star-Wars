@@ -5,8 +5,7 @@ import {
 } from './use-context';
 import TestMenu from "./menu";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Header from "../header";
-import RandomPlanet from "../random-planet";
+import {ReduxTest} from "./redux/redux";
 
 const Test = () =>{
     return(
@@ -15,9 +14,13 @@ const Test = () =>{
                 <TestMenu />
 
                 <Switch>
+                    {/*<Route*/}
+                    {/*    path="/test/use-context/"*/}
+                    {/*    component={ UseContext }*/}
+                    {/*    exact />*/}
                     <Route
-                        path="/test/use-context/"
-                        component={ UseContext }
+                        path="/test"
+                        component={ ReduxTest }
                         exact />
                 </Switch>
             </BrowserRouter>

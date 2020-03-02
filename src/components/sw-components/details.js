@@ -1,30 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import ItemDetails from "../item-details";
-import SwapiService from "../../services/api";
 import Record from "../item-details/record";
-
-const swapi = new SwapiService();
-let{
-    getPerson,
-    getPlanet,
-    getStarship,
-} = swapi;
-
-function withDataDetails() {
-    return class extends React.Component {
-
-         render() {
-             return ;
-         }
-    }
-}
+import SwapiContext from "../swapi-service-context";
 
 const PersonDetails = ({ itemId }) => {
+    const { getPerson } = useContext(SwapiContext);
     return (
         <ItemDetails
-            itemId = {itemId}
-            getData = {getPerson}
+            itemId = { itemId }
+            getData = { getPerson }
             itemName = "person">
 
             <Record field="name" label="Name"/>
@@ -35,11 +20,12 @@ const PersonDetails = ({ itemId }) => {
     )
 };
 
-const PlanetDetails = ({itemId}) => {
+const PlanetDetails = ({ itemId }) => {
+    const { getPlanet } = useContext(SwapiContext);
     return (
         <ItemDetails
-            itemId={itemId}
-            getData = {getPlanet}
+            itemId={ itemId }
+            getData = { getPlanet }
             itemName = 'planet'>
 
             <Record field="name" label="Name"/>
@@ -50,11 +36,12 @@ const PlanetDetails = ({itemId}) => {
     )
 };
 
-const StarshipDetails = ({itemId}) => {
+const StarshipDetails = ({ itemId }) => {
+    const { getStarship } = useContext(SwapiContext);
     return (
         <ItemDetails
             itemId={itemId}
-            getData = {getStarship}
+            getData =  { getStarship }
             itemName = 'starship'>
 
             <Record field="name" label="Name"/>
