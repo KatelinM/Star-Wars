@@ -9,17 +9,22 @@ let{
     getPerson,
     getPlanet,
     getStarship,
-    getPersonImage,
-    getPlanetImage,
-    getStarshipImage,
 } = swapi;
+
+function withDataDetails() {
+    return class extends React.Component {
+
+         render() {
+             return ;
+         }
+    }
+}
 
 const PersonDetails = ({ itemId }) => {
     return (
         <ItemDetails
-            itemId={itemId}
+            itemId = {itemId}
             getData = {getPerson}
-            getImage = {getPersonImage}
             itemName = "person">
 
             <Record field="name" label="Name"/>
@@ -35,7 +40,6 @@ const PlanetDetails = ({itemId}) => {
         <ItemDetails
             itemId={itemId}
             getData = {getPlanet}
-            getImage = {getPlanetImage}
             itemName = 'planet'>
 
             <Record field="name" label="Name"/>
@@ -51,7 +55,6 @@ const StarshipDetails = ({itemId}) => {
         <ItemDetails
             itemId={itemId}
             getData = {getStarship}
-            getImage = {getStarshipImage}
             itemName = 'starship'>
 
             <Record field="name" label="Name"/>

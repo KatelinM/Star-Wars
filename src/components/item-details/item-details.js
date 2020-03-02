@@ -4,30 +4,18 @@ import './item-details.css';
 import Loader from "../loader";
 import {Link} from "react-router-dom";
 
-
-function withDataDetails() {
-    return class extends React.Component {
-
-         render() {
-             return ;
-         }
-    }
-}
-
 const ItemDetails = (props) => {
 
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState(null);
 
   const updatePerson = () =>{
-    const { itemId, getData, getImage } = props;
+    const { itemId, getData } = props;
     if (!itemId) {
       return;
     }
 
     setLoading(true);
-    setImage(getImage(itemId));
 
     getData(itemId)
         .then(person => {
@@ -52,7 +40,7 @@ const ItemDetails = (props) => {
   return (
       <div className="person-details card">
         <img className="person-image"
-             src={ image }
+             src={ item.image }
              alt={ item.name }/>
 
         <div className="card-body">

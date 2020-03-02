@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import './people-page.css';
-import SwapiService from "../../../services/api";
 import Row from "../../row";
 import ErrorBoundary from "../../error-boundary/index";
 import {PersonDetails, PersonList} from "../../sw-components";
@@ -11,7 +10,6 @@ const PeoplePage = () => {
     const onItemClicked = function (id) {
         setSelectedItemId(id);
     };
-    const swapi = new SwapiService()
 
     const list = (
         <ErrorBoundary>
@@ -19,17 +17,14 @@ const PeoplePage = () => {
             onItemSelected = {(id)=>{ onItemClicked(id) }}
             itemId={itemId}
         >
-            {({name, birthYear})=>`${name} (${birthYear})`}
+            {(p)=>`${ p.name } (${ p.birth_year })`}
         </PersonList>
         </ErrorBoundary>
 
     );
     const details = (
         <ErrorBoundary>
-            <PersonDetails itemId={itemId}
-                         getData = {swapi.getPerson}
-                         getImage = {swapi.getPersonImage}
-                         itemName = 'person'/>
+            <PersonDetails itemId={itemId} />
         </ErrorBoundary>
     );
 

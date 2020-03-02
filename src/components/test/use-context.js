@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import './index.css';
+import '../../index.css';
 
 const MyContext = React.createContext();
 const SecondContext = React.createContext();

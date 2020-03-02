@@ -1,12 +1,12 @@
 import React  from 'react';
-import {Switch, Route, BrowserRouter, Redirect} from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 
 import './app.css';
 import {PeoplePage, StarshipPage } from "../pages";
-import UseCon from "../../use-context";
+import UseCon from "../test/use-context";
 import {PersonDetails} from "../sw-components";
 import SwapiService from "../../services/api";
 

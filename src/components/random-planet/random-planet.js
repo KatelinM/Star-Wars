@@ -41,7 +41,7 @@ export default class RandomPlanet extends Component {
         .catch(
             this.onError
         )
-  }
+  };
 
   componentDidMount() {
     this.updatePlanet();
@@ -68,12 +68,12 @@ export default class RandomPlanet extends Component {
 }
 
 const PlanetView = ({planet}) => {
-  let {id, name, population, rotationPeriod, diameter} = planet;
+  let { name, population, rotationPeriod, diameter, image} = planet;
 
   return (
       <>
         <img className="planet-image"
-             src={ swapi.getPlanetImage(id) }
+             src={ image }
              alt={ name } />
         <div>
           <h4>{ name }</h4>
@@ -94,4 +94,4 @@ const PlanetView = ({planet}) => {
         </div>
       </>
   )
-}
+};

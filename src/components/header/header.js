@@ -1,34 +1,34 @@
 import React from 'react';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {NavLink } from 'react-router-dom';
 
 import './header.css';
 
-const Header = () => {
+const Header = (props) => {
+
   return (
       <>
           <div className="header d-flex">
           <h3>
-            <Link to="/">
-              Star DB
-            </Link>
+            <NavLink to="/" exact >Star DB</NavLink>
           </h3>
           <ul className="d-flex">
             <li>
-              <Link to="people">People</Link>
+              <NavLink to="people" exact >People</NavLink>
             </li>
             <li>
-              <Link to="planets">Planets</Link>
+              <NavLink to="planets" exact >Planets</NavLink>
             </li>
             <li>
-              <Link to="starships">Starships</Link>
+              <NavLink to="starships" exact >Starships</NavLink>
             </li>
             <li>
-              <Link to="test/use-context">Test</Link>
+              <NavLink to="test/use-context" exact >Test</NavLink>
             </li>
           </ul>
         </div>
       </>
   );
 };
+
 
 export default Header;

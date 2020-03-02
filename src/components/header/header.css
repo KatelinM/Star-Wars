@@ -6,11 +6,21 @@
 .header ul li {
   list-style: none;
   margin: 0;
-  padding: .5rem 1rem;
   border-radius: 3px;
 }
 
-.header ul li:hover {
+.header ul li a {
+    color: #00bc8c;
+    text-decoration: none;
+    display: block;
+    padding: 5px 20px;
+}
+
+.header ul li a.active {
+  background-color: greenyellow;
+}
+
+.header ul li a:hover {
   background-color: #444;
 }
 
