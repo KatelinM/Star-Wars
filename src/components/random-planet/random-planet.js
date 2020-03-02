@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './random-planet.css';
 import SwapiService from "../../services/api";
 import Loader from "../loader";
-import Error from "../error-indicator/index";
+import Error from "../error-indicator";
 import ErrorBoundary from "../error-boundary";
 import icon from '../../services/helpers/no.jpg';
 

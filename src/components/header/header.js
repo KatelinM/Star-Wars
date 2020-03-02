@@ -13,16 +13,16 @@ const Header = (props) => {
           </h3>
           <ul className="d-flex">
             <li>
-              <NavLink to="people" exact >People</NavLink>
+              <NavLink to="/people/" exact >People</NavLink>
             </li>
             <li>
-              <NavLink to="planets" exact >Planets</NavLink>
+              <NavLink to="/planets/" exact >Planets</NavLink>
             </li>
             <li>
-              <NavLink to="starships" exact >Starships</NavLink>
+              <NavLink to="/starships/" exact >Starships</NavLink>
             </li>
             <li>
-              <NavLink to="test/use-context" exact >Test</NavLink>
+              <NavLink to="/test/use-context/" exact >Test</NavLink>
             </li>
           </ul>
         </div>

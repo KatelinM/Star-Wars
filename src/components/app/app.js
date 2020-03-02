@@ -5,9 +5,9 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 
 import './app.css';
-import {PeoplePage, StarshipPage } from "../pages";
+import {PeoplePage, PlanetsPage, StarshipPage} from "../pages";
 import UseCon from "../test/use-context";
-import {PersonDetails} from "../sw-components";
+import {PersonDetails, PlanetDetails, StarshipDetails} from "../sw-components";
 import SwapiService from "../../services/api";
 
 const App = () => {
@@ -27,37 +27,43 @@ const App = () => {
                         exact />
 
                     <Route
-                        path="/people"
+                        path="/people/"
                         component={PeoplePage}
                         exact />
 
-                    <Route path="/people/:id"
-                           render={
-                               ({ match }) => {
-                                    return (
-                                        <PersonDetails
-                                           itemId={ match.params.id }
-                                           getData = {swapi.getPerson}
-                                           getImage = {swapi.getPersonImage}
-                                           itemName = 'person'/>
-                                           )
-                               }
-                           }
-
-                        exact />
-
                     <Route
-                        path="/starships"
+                        path="/starships/"
                         component={StarshipPage}
                         exact />
 
                     <Route
-                        path="/starships/:id"
-                        component={StarshipPage}
+                        path="/planets/"
+                        component={PlanetsPage}
                         exact />
 
                     <Route
-                        path="/test/use-context"
+                        path="/people/:id/"
+                        render = {
+                            ({ match }) => <PersonDetails itemId = { match.params.id } />
+                        }
+                        exact />
+
+                    <Route
+                        path="/planets/:id/"
+                        render = {
+                            ({ match }) => <PlanetDetails itemId = { match.params.id } />
+                        }
+                        exact />
+
+                    <Route
+                        path="/starships/:id/"
+                        render = {
+                            ({ match }) => <StarshipDetails itemId = { match.params.id } />
+                        }
+                        exact />
+
+                    <Route
+                        path="/test/use-context/"
                         component={UseCon}
                         exact />
 
