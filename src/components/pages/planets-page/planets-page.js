@@ -14,15 +14,7 @@ const PlanetsPage = () => {
         <PlanetList
             onItemSelected = {(id)=>{ onItemClicked(id) }}
             itemId={ itemId }
-        >
-         {({ name, diameter})=>(
-            <span>
-                {name } (
-                    diameter { diameter } m³
-                )
-            </span>
-        )}
-        </PlanetList>
+        />
     );
 
     const details = (

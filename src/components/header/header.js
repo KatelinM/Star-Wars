@@ -22,7 +22,7 @@ const Header = (props) => {
               <NavLink to="/starships/" exact >Starships</NavLink>
             </li>
             <li>
-              <NavLink to="/test/use-context/" exact >Test</NavLink>
+              <NavLink to="/test/" exact >Test</NavLink>
             </li>
           </ul>
         </div>

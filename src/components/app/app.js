@@ -6,7 +6,7 @@ import RandomPlanet from '../random-planet';
 
 import './app.css';
 import {PeoplePage, PlanetsPage, StarshipPage} from "../pages";
-import UseCon from "../test/use-context";
+import Test from "../test";
 import {PersonDetails, PlanetDetails, StarshipDetails} from "../sw-components";
 
 const App = () => {
@@ -61,11 +61,11 @@ const App = () => {
                         exact />
 
                     <Route
-                        path="/test/use-context/"
-                        component={UseCon}
+                        path="/test/"
+                        component={Test}
                         exact />
 
-                     <Route render={() => <h2>Page not found</h2>}/>
+                    <Route render={() => <h2>Page not found</h2>}/>
                 </Switch>
             </BrowserRouter>
         </>

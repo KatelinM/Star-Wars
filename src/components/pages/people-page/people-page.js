@@ -6,7 +6,7 @@ import ErrorBoundary from "../../error-boundary";
 import {PersonDetails, PersonList} from "../../sw-components";
 
 const PeoplePage = () => {
-    const [itemId, setSelectedItemId] = useState(null);
+    const [itemId, setSelectedItemId] = useState({});
     const onItemClicked = function (id) {
         setSelectedItemId(id);
     };
@@ -16,9 +16,9 @@ const PeoplePage = () => {
         <PersonList
             onItemSelected = {(id)=>{ onItemClicked(id) }}
             itemId={itemId}
-        >
-            {(p)=>`${ p.name } (${ p.birth_year })`}
-        </PersonList>
+        />
+            {/*{(p)=>`${ p.name } (${ p.birth_year })`}*/}
+
         </ErrorBoundary>
 
     );

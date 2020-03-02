@@ -4,7 +4,7 @@ import '../../index.css';
 const MyContext = React.createContext();
 const SecondContext = React.createContext();
 
-let UseCon = () => {
+let UseContext = () => {
     return (
         <>
             <MyContext.Provider value="UseContext">
@@ -40,7 +40,7 @@ const ChildHook = () => {
     )
 };
 
-export default UseCon
+export { UseContext }
 
 
 
