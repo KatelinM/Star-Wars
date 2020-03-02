@@ -3,17 +3,18 @@ import React from 'react';
 import './item-list.css';
 
 function ItemList(props) {
-    let {data} = props;
+    let { data, children, itemId, onItemSelected } = props;
+
     return (
         <ul className="item-list list-group mb-20">
 
             {
                 data.map(i => {
-                    let label = props.children(i);
+                    let label = children(i);
                     return (
-                        <li className={`${props.itemId === i.id ? 'active' : null} list-group-item`}
+                        <li className={`${itemId === i.id ? 'active' : null} list-group-item`}
                             key={i.name}
-                            onClick={() => props.onItemSelected(i.id)}>
+                            onClick={() => onItemSelected(i.id)}>
                             {label}
                         </li>
                     )

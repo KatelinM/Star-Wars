@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './people-page.css';
 import Row from "../../row";
-import ErrorBoundary from "../../error-boundary/index";
+import ErrorBoundary from "../../error-boundary";
 import {PersonDetails, PersonList} from "../../sw-components";
 
 const PeoplePage = () => {

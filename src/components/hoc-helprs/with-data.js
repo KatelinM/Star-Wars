@@ -1,41 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Loader from "../loader";
 import ErrorBoundary from "../error-boundary";
 
 const withData = (View, getData) => {
-    return class extends React.Component {
+    return (props) => {
+        const [data, setData] = useState([]);
 
-        state = {
-            data: [],
-        };
-
-        updatePeople = () => {
+        let updatePeople = () => {
             getData()
                 .then((data) => {
-                        this.setState(
-                            {
-                                data,
-                            }
-                        )
+                        setData(data)
                     }
                 )
         };
 
-        componentDidMount() {
-            this.updatePeople();
+        useEffect(() => {
+            updatePeople();
+        });
+
+        if (!data.length) {
+            return <Loader />
         }
 
-        render() {
-            let { data } = this.state;
-            if (!data.length){
-                return <Loader />
-            }
-            return (
-                <ErrorBoundary>
-                    <View {...this.props} data = {data} />
-                </ErrorBoundary>
-                )
-        }
+        return (
+            <ErrorBoundary>
+                <View {...props} data = {data} />
+            </ErrorBoundary>
+        )
     }
 };
 
