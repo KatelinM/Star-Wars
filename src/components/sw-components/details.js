@@ -40,8 +40,8 @@ const StarshipDetails = ({ itemId }) => {
     const { getStarship } = useContext(SwapiContext);
     return (
         <ItemDetails
-            itemId={itemId}
-            getData =  { getStarship }
+            itemId = { itemId }
+            getData = { getStarship }
             itemName = 'starship'>
 
             <Record field="name" label="Name"/>

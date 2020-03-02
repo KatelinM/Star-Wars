@@ -23,7 +23,7 @@ const withChild = (View, child) => {
 
 const PersonList = withData( withChild(
     ItemList,
-    ({ name, birth_year }) => `${ name } (${ birth_year })`
+    ({ name, birth_year: birhYear }) => `${ name } (${ birhYear })`
 ), getAllPeople);
 
 const PlanetList = withData( withChild(
