@@ -1,41 +1,53 @@
-const initialState = {
-    tracks: [ 'bad guy', 'planet' ],
-    playlists: [ 'home list', 'work list' ],
-}
+import {combineReducers} from "redux";
 
-const playlist = ( state = initialState, action ) => {
+const filter = ( state = '', action ) => {
+    switch (action.type) {
+        case 'FILTER_TRACK':
+            return action.name;
+
+        default:
+            return state;
+    }
+};
+
+const trackList = ( state = [], action ) => {
 
     switch(action.type) {
         case 'ADD_TRACK':
-            return {
+            return [
                 ...state,
-                tracks: [ ...state.tracks, action.trackName ],
-            };
+                action.track
+            ];
+
         case 'REMOVE_TRACK':
-            return {
-                ...state,
-                tracks: state.tracks.filter((name) => {
-                    return name !== action.trackName;
-                }),
-            };
+            return state.filter(({name}) => {
+                        return name !== action.track;
+                    }) ;
+        default:
+            return state;
+    }
+};
 
+const playList = ( state = [], action ) => {
 
+    switch(action.type) {
         case 'ADD_PLAYLIST':
-            return {
+            return  [
                 ...state,
-                playlists: [ ...state.playlists, action.playlistName ],
-            };
+                action.playlistName
+            ];
         case 'REMOVE_PLAYLIST':
-            return {
-                ...state,
-                playlists: state.playlists.filter((name) => {
-                    return name !== action.playlistName;
-                }),
-            };
+            return state.filter((name) => {
+                        return name !== action.playlistName;
+                    });
         default:
             return state;
     }
 
 };
 
-export default playlist;
+export default combineReducers({
+    trackList,
+    playList,
+    filter,
+});
