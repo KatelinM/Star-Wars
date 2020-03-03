@@ -8,7 +8,6 @@ const StarshipDetails =  (props) => {
 
     return (
         <ItemDetails {...props} itemName = 'starship'>
-
             <Record field="name" label="Name"/>
             <Record field="max_atmosphering_speed" label="Speed"/>
             <Record field="passengers" label="Passengers"/>

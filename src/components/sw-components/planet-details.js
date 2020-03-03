@@ -8,7 +8,6 @@ const PlanetDetails = (props) => {
 
     return (
         <ItemDetails {...props} itemName = 'planet'>
-
             <Record field="name" label="Name"/>
             <Record field="population" label="Population"/>
             <Record field="rotation_period" label="Rotation Period"/>

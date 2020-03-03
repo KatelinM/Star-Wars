@@ -8,7 +8,6 @@ const PersonDetails = (props) => {
 
     return (
         <ItemDetails {...props} itemName = "person">
-
             <Record field="name" label="Name"/>
             <Record field="eye_color" label="Eye color"/>
             <Record field="gender" label="Gender"/>

@@ -6,11 +6,11 @@ const TestMenu = () =>{
     return (
         <>
             <ul>
-                {/*<li>*/}
-                {/*    <NavLink to='/test/use-context/'> useContext Hook </NavLink>*/}
-                {/*</li>*/}
                 <li>
-                    <NavLink to='/test/'> Redux Test </NavLink>
+                    <NavLink to='/test/use-context/'> useContext Hook </NavLink>
+                </li>
+                <li>
+                    <NavLink to='/test/redux/'> Redux Test </NavLink>
                 </li>
             </ul>
         </>

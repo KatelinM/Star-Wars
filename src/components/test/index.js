@@ -15,12 +15,12 @@ const Test = () =>{
                 <TestMenu />
 
                 <Switch>
-                    {/*<Route*/}
-                    {/*    path="/test/use-context/"*/}
-                    {/*    component={ UseContext }*/}
-                    {/*    exact />*/}
                     <Route
-                        path="/test"
+                        path="/test/use-context/"
+                        component={ UseContext }
+                        exact />
+                    <Route
+                        path="/test/redux/"
                         component={ ReduxTest }
                         exact />
                 </Switch>
