@@ -1,15 +1,16 @@
-import React, {useContext} from "react";
+import React from "react";
 
 import ItemDetails from "../item-details";
 import Record from "../item-details/record";
-import SwapiContext from "../swapi-service-context";
+import { withServerData } from "../hoc-helprs/index";
 
-const PersonDetails = ({ itemId }) => {
-    const { getPerson } = useContext(SwapiContext);
+const PersonDetails = (props) => {
+    const { itemId, swapi} = props;
+
     return (
         <ItemDetails
             itemId = { itemId }
-            getData = { getPerson }
+            getData = { swapi.getPerson }
             itemName = "person">
 
             <Record field="name" label="Name"/>
@@ -20,12 +21,13 @@ const PersonDetails = ({ itemId }) => {
     )
 };
 
-const PlanetDetails = ({ itemId }) => {
-    const { getPlanet } = useContext(SwapiContext);
+const PlanetDetails = (props) => {
+    const { itemId, swapi} = props;
+
     return (
         <ItemDetails
             itemId={ itemId }
-            getData = { getPlanet }
+            getData = { swapi.getPlanet }
             itemName = 'planet'>
 
             <Record field="name" label="Name"/>
@@ -36,12 +38,12 @@ const PlanetDetails = ({ itemId }) => {
     )
 };
 
-const StarshipDetails = ({ itemId }) => {
-    const { getStarship } = useContext(SwapiContext);
+const StarshipDetails =  (props) => {
+    const { itemId, swapi } = props;
     return (
         <ItemDetails
             itemId = { itemId }
-            getData = { getStarship }
+            getData = { swapi.getStarship }
             itemName = 'starship'>
 
             <Record field="name" label="Name"/>
@@ -52,8 +54,12 @@ const StarshipDetails = ({ itemId }) => {
     )
 };
 
+const PersonDetailsWD = withServerData(PersonDetails);
+const PlanetDetailsWD = withServerData(PlanetDetails);
+const StarshipDetailsWD = withServerData(StarshipDetails);
+
 export {
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails,
+    PersonDetailsWD,
+    PlanetDetailsWD,
+    StarshipDetailsWD,
 }

@@ -1,16 +1,15 @@
-import React, {Component, useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './random-planet.css';
 import Loader from "../loader";
 import Error from "../error-indicator";
 import ErrorBoundary from "../error-boundary";
 import icon from '../../services/helpers/no.jpg';
-import SwapiContext from "../swapi-service-context";
+import { withServerData } from "../hoc-helprs";
 
 
 
 const RandomPlanet = (props) => {
-    const { getPlanet } = useContext(SwapiContext);
 
     const [ planet, setPlanet ] = useState({});//если поставить null то при 1-ом рендере будет ошибка let {name, population, rotationPeriod, diameter} = this.state.planet;
     const [ loading, setLoading ] = useState(true);
@@ -29,7 +28,7 @@ const RandomPlanet = (props) => {
     const updatePlanet = () => { //без стрелочной функции будет ошибка в this.interval = setInterval(this.updatePlanet, 2000)
         const id = Math.floor(Math.random()*25) + 2;
 
-        getPlanet(id)
+        props.swapi.getPlanet(id)
             .then( (planet) =>
                 onPlanetLoaded(planet)
             )
@@ -86,4 +85,6 @@ const PlanetView = ({planet}) => {
     )
 };
 
-export default RandomPlanet;
+const RandomPlanetWD = withServerData(RandomPlanet);
+
+export default RandomPlanetWD;
