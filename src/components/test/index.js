@@ -5,7 +5,8 @@ import {
 } from './use-context';
 import TestMenu from "./menu";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {ReduxTest} from "./redux/redux";
+import ReduxTest from "./redux/redux";
+import {Provider} from "react-redux";
 
 const Test = () =>{
     return(

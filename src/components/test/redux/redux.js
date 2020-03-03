@@ -1,34 +1,55 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import '../../../index.css';
-import {createStore} from "redux";
-import {decreaseAC, increaseAC, randNumAC} from "./action-creators";
-import reducer from "./reducer";
+import {addTrackAC, removeTrackAC} from "./action-creators";
+import { connect } from "react-redux";
 
-const ReduxTest = () =>{
-    const store = createStore(reducer);
+const ReduxTest = (props) => {
+console.log(props.trackList)
+    const addTrack = () => {
+        props.onAddTrack(trackInput.value)
+        trackInput.value =''
+    };
 
-    store.subscribe(() => {
-        document.getElementById('s').innerHTML = store.getState()
-    });
+    const removeTrack = () => {
+        props.onRemoveTrack(trackInput.value)
+        trackInput.value =''
+    };
 
-    const randNum = () => Math.floor(Math.random()*10);
-
-    const increase = () => { store.dispatch(increaseAC()) };
-    const decrease = () => { store.dispatch(decreaseAC()) };
-    const random = () => { store.dispatch(randNumAC(randNum())) };
+    let trackInput;
 
     return(
         <>
-            <p id="s">{store.getState()}</p>
-            <button onClick={() => increase()}>+</button>
-            <button onClick={() => decrease()}>-</button>
-            <button onClick={() => random()}>RND</button>
+            <div>
+                <input
+                    ref={(input) => trackInput = input}
+                    type = "text"
+                />
+                <button onClick={addTrack}>Add track</button>
+                <button onClick={removeTrack}>Remove track</button>
+                <ul className="list">
+                    { props.trackList.map((track, i) =>
+                        <li key={i}>{track}</li>)}
+                </ul>
+            </div>
         </>
-
     )
 };
 
-export { ReduxTest }
+export default connect(
+    state => ({
+        trackList: state.tracks,
+    }),
+    dispatch => ({
+        onAddTrack: (newTrack) => {
+            dispatch(addTrackAC(newTrack))
+        },
+        onRemoveTrack: (newTrack) => {
+            dispatch(removeTrackAC(newTrack))
+        },
+
+    })
+)
+(ReduxTest)
 
 
 

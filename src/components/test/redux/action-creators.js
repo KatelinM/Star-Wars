@@ -1,3 +1,2 @@
-export const increaseAC = () => ({type: 'INC'});
-export const decreaseAC = () => ({type: 'DEC'});
-export const randNumAC = (n) => ({type: 'RND', delta: n});
+export const addTrackAC = (track) => ({ type: 'ADD_TRACK', trackName: track });
+export const removeTrackAC = (track) => ({ type: 'REMOVE_TRACK', trackName: track });
