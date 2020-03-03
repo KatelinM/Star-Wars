@@ -4,14 +4,10 @@ import ItemDetails from "../item-details";
 import Record from "../item-details/record";
 import { withServerData } from "../hoc-helprs/index";
 
-const StarshipDetails =  ({ itemId, swapi }) => {
-    let { getStarship } = swapi;
+const StarshipDetails =  (props) => {
 
     return (
-        <ItemDetails
-            itemId = { itemId }
-            getData = { getStarship }
-            itemName = 'starship'>
+        <ItemDetails {...props} itemName = 'starship'>
 
             <Record field="name" label="Name"/>
             <Record field="max_atmosphering_speed" label="Speed"/>
@@ -21,6 +17,10 @@ const StarshipDetails =  ({ itemId, swapi }) => {
     )
 };
 
-const StarshipDetailsWD = withServerData(StarshipDetails);
+const mapMethodsToProps = (swapi) => {
+    return {
+        getData: swapi.getStarship,
+    }
+};
 
-export default StarshipDetailsWD;
+export default withServerData( StarshipDetails, mapMethodsToProps );

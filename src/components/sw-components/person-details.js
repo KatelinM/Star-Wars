@@ -4,14 +4,10 @@ import ItemDetails from "../item-details";
 import Record from "../item-details/record";
 import { withServerData } from "../hoc-helprs/index";
 
-const PersonDetails = ({ itemId, swapi}) => {
-    const { getPerson } = swapi;
+const PersonDetails = (props) => {
 
     return (
-        <ItemDetails
-            itemId = { itemId }
-            getData = { getPerson }
-            itemName = "person">
+        <ItemDetails {...props} itemName = "person">
 
             <Record field="name" label="Name"/>
             <Record field="eye_color" label="Eye color"/>
@@ -21,6 +17,10 @@ const PersonDetails = ({ itemId, swapi}) => {
     )
 };
 
-const PersonDetailsWD = withServerData(PersonDetails);
+const mapMethodsToProps = (swapi) => {
+    return {
+        getData: swapi.getPerson
+    }
+};
 
-export default PersonDetailsWD;
+export default withServerData(PersonDetails, mapMethodsToProps);
