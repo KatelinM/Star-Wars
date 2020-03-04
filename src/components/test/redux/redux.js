@@ -10,13 +10,12 @@ const ReduxTest = (props) => {
     };
 
     const removeTrack = () => {
-        props.onRemoveTrack(trackInput.value)
+        props.onRemoveTrack(trackInput.value);
         trackInput.value =''
     };
 
     const filterTrack = () => {
-        props.onFilterTrack(filterInput.value)
-        trackInput.value =''
+        props.onFilterTrack(filterInput.value);
     };
 
     let trackInput;
