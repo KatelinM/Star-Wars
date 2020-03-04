@@ -23,6 +23,12 @@ const trackList = ( state = [], action ) => {
             return state.filter(({name}) => {
                         return name !== action.track;
                     }) ;
+
+        case 'GET_TRACKS':
+            return [
+                ...state,
+                ...action.payload
+            ];
         default:
             return state;
     }

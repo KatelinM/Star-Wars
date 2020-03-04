@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import '../../../index.css';
-import {addTrackAC, filterTrackAC, removeTrackAC} from "./action-creators";
+import {addTrackAC, filterTrackAC, getTracksAC, removeTrackAC} from "./action-creators";
 import { connect } from "react-redux";
 
 const ReduxTest = (props) => {
@@ -25,13 +25,13 @@ const ReduxTest = (props) => {
         <>
             <div>
                 <div className="mb-2">
-                     <input
-                            ref={(input) => trackInput = input}
-                            type = "text"
-                            className="mr-4"
-                        />
-                        <button onClick={addTrack} className="btn btn-success mr-4">Add track</button>
-                        <button onClick={removeTrack} className="btn btn-danger">Remove track</button>
+                    <input
+                        ref={(input) => trackInput = input}
+                        type = "text"
+                        className="mr-4"
+                    />
+                    <button onClick={addTrack} className="btn btn-success mr-4">Add track</button>
+                    <button onClick={removeTrack} className="btn btn-danger">Remove track</button>
                 </div>
                 <div>
                     <input
@@ -40,6 +40,9 @@ const ReduxTest = (props) => {
                         onChange={filterTrack}
                         placeholder=" Search track..."
                     />
+                </div>
+                <div>
+                  <button onClick={props.onGetTracks} className="btn btn-success mr-4">Get tracks</button>
                 </div>
                 <ul className="list">
                     { props.tracks.map((track, i) =>
@@ -53,8 +56,8 @@ const ReduxTest = (props) => {
 export default connect(
     state => ({
         tracks: state.trackList.filter((track) => {
-                        return track.name.indexOf(state.filter) >= 0;
-                    }),
+            return track.name.indexOf(state.filter) >= 0;
+        }),
         playList: state.playList,
         filter: state.filter
     }),
@@ -74,6 +77,10 @@ export default connect(
         onFilterTrack: (newTrack) => {
             dispatch(filterTrackAC(newTrack))
         },
+
+        onGetTracks: () => {
+            dispatch(getTracksAC())
+        }
 
     })
 )
