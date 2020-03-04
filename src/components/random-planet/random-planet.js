@@ -7,10 +7,7 @@ import ErrorBoundary from "../error-boundary";
 import icon from '../../services/helpers/no.jpg';
 import { withServerData } from "../hoc-helprs";
 
-
-
 const RandomPlanet = (props) => {
-
     const [ planet, setPlanet ] = useState({});//если поставить null то при 1-ом рендере будет ошибка let {name, population, rotationPeriod, diameter} = this.state.planet;
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState(false);
@@ -28,7 +25,7 @@ const RandomPlanet = (props) => {
     const updatePlanet = () => { //без стрелочной функции будет ошибка в this.interval = setInterval(this.updatePlanet, 2000)
         const id = Math.floor(Math.random()*25) + 2;
 
-        props.swapi.getPlanet(id)
+        props.getData(id)
             .then( (planet) =>
                 onPlanetLoaded(planet)
             )
@@ -56,8 +53,8 @@ const RandomPlanet = (props) => {
     );
 };
 
-const PlanetView = ({planet}) => {
-    let { name, population, rotationPeriod, diameter, image} = planet;
+const PlanetView = (props) => {
+    let { name, population, rotationPeriod, diameter, image} = props.planet;
 
     return (
         <>
@@ -85,6 +82,12 @@ const PlanetView = ({planet}) => {
     )
 };
 
-const RandomPlanetWD = withServerData(RandomPlanet);
+const mapMethodsToProps = (swapi) => {
+    return {
+        getData: swapi.getPlanet
+    }
+};
+
+const RandomPlanetWD = withServerData(RandomPlanet, mapMethodsToProps);
 
 export default RandomPlanetWD;
