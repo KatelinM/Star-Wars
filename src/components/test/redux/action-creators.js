@@ -25,8 +25,7 @@ export const addTrackAC = (track) => ({ type: 'ADD_TRACK', track: track });
 export const removeTrackAC = (track) => ({ type: 'REMOVE_TRACK', track: track });
 export const filterTrackAC = (name) => ({ type: 'FILTER_TRACK', name });
 export const getTracksAC = () => dispatch => {
-    setTimeout( () => {
-        console.log(setTimeout)
+    setTimeout( () => { 
         dispatch({type: 'GET_TRACKS', payload: mockApiData})
     }, 2000);
 
