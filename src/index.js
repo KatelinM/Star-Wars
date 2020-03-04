@@ -8,7 +8,7 @@ import playlist from "./components/test/redux/reducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
-const store = createStore(playlist);
+const store = createStore(playlist, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
     <Provider store={store}>
